@@ -25,6 +25,7 @@ export default function Search () {
 
     const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if(e.key === "Enter") {
+            e.preventDefault()
             fetchData()
         }
     } 
@@ -44,3 +45,4 @@ export default function Search () {
         </>
     )
 }
+
