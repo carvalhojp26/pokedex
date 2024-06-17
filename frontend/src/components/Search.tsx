@@ -1,9 +1,17 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { PokemonData } from '../types'
 
-export default function Search () {
-    const [pokemon, setPokemon] = useState('')
-    const [pokemonData, setPokemonData] = useState(null)
+interface Props {
+    setPokemonData: (data: PokemonData | null) => void;
+}
+
+export default function Search ({setPokemonData}: Props) {
+    const [pokemon, setPokemon] = useState("Pikachu")
+
+    useEffect(() => {
+        fetchData()
+    },[])
 
     const fetchData = async () => {
         if(!pokemon) {
@@ -13,9 +21,18 @@ export default function Search () {
         
         try {
             const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.toLowerCase()}`)
-            console.log(response.data)
-            setPokemonData(response.data)
-            console.log(pokemonData)
+            const data = response.data 
+
+            const pokemonInfo = {
+                name: data.name,
+                height: data.height,
+                weight: data.weight,
+                frontImage: data.sprites.front_default,
+                backImage: data.sprites.back_default
+            }
+
+            setPokemonData(pokemonInfo)
+            console.log(pokemonInfo)
         } catch (error) {
             console.error("error fetching data", error)
             setPokemonData(null)
@@ -36,7 +53,7 @@ export default function Search () {
             <form>
                 <input
                     type="text"
-                    placeholder="Pikachu..."
+                    placeholder="Search a Pokemon"
                     value={pokemon}
                     onChange={(e) => setPokemon(e.target.value)}
                     onKeyDown={handleKeyPress}
@@ -45,4 +62,3 @@ export default function Search () {
         </>
     )
 }
-
