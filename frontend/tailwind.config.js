@@ -1,9 +1,21 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: [],
+module.exports = {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,jsx,ts,tsx}",
+  ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'background': '#373737',
+        'components': '#D6D6D6'
+      },
+      width: {
+        "custom": '500px',
+        "display-w": '550px',
+        "height": '350px'
+      },
+    },
   },
   plugins: [],
 }
-

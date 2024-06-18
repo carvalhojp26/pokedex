@@ -24,6 +24,7 @@ export default function Search ({setPokemonData}: Props) {
             const data = response.data 
 
             const pokemonInfo = {
+                id:data.id,
                 name: data.name,
                 height: data.height,
                 weight: data.weight,
@@ -48,10 +49,11 @@ export default function Search ({setPokemonData}: Props) {
     } 
 
     return (
-        <>
+        <div className='flex items-center justify-center column flex-col'>
             <img src="https://archives.bulbagarden.net/media/upload/4/4b/Pok%C3%A9dex_logo.png"/>
             <form>
                 <input
+                    className='w-custom mt-10 h-10 p-4 rounded-lg bg-components'
                     type="text"
                     placeholder="Search a Pokemon"
                     value={pokemon}
@@ -59,6 +61,6 @@ export default function Search ({setPokemonData}: Props) {
                     onKeyDown={handleKeyPress}
                 />
             </form>
-        </>
+        </div>
     )
 }
