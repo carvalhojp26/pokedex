@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { PokemonData } from '../types'
+import pokedexLogo from '/images/Pokédex_logo.png'
 
 interface Props {
     setPokemonData: (data: PokemonData | null) => void;
@@ -50,7 +51,7 @@ export default function Search ({setPokemonData}: Props) {
 
     return (
         <div className='flex items-center justify-center column flex-col'>
-            <img src="https://archives.bulbagarden.net/media/upload/4/4b/Pok%C3%A9dex_logo.png"/>
+            <img src={pokedexLogo}/>
             <form>
                 <input
                     className='w-custom mt-10 h-10 p-4 rounded-lg bg-components'

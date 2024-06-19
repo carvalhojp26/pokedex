@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
+import pokeball from '/images/pokeball.png'
 
-export default function Header () {
+export default function Header() {
     return (
-        <div>
-            <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fpngfre.com%2Fpokeball-png%2F&psig=AOvVaw2arqy0htUJq1SMnt96aD-b&ust=1718787070584000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCKDMrYPj5IYDFQAAAAAdAAAAABAK" />
-            <Link to={"/favorite"}>Go to my Favorites</Link>
+        <div className="flex justify-end items-center p-8 absolute top-0 right-0 w-full bg-transparent">
+            <img className="w-12 h-12 mr-4" src={pokeball} alt="Pokeball" />
+            <Link className='text-white' to={"/favorite"}>My Favorites =&gt;</Link>
         </div>
     )
 }
