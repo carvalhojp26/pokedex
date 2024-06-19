@@ -1,27 +1,19 @@
-import { useState, useEffect } from "react"
-import Display from "./components/Display.tsx"
-import Search from "./components/Search.tsx"
-import { PokemonData } from './types'
-import Header from "./components/Header.tsx"
+import { useState, useEffect } from "react";
+import Display from "./components/Display";
+import Search from "./components/Search";
+import { PokemonData } from './types';
+import Header from "./components/Header";
 
 function App() {
-  const [pokemonData, setPokemonData] = useState<PokemonData | null>(null)
-
-    useEffect(() => {
-      document.body.style.overflow = 'hidden';
-  
-      return () => {  
-        document.body.style.overflow = 'visible';
-      };
-    }, []);
+  const [pokemonList, setPokemonList] = useState<PokemonData[]>([]);  
 
   return (
     <>
-      <Header></Header>
-      <Search setPokemonData={setPokemonData}/>
-      <Display pokemonData={pokemonData}/>
+      <Header />
+      <Search />
+      <Display pokemonList={pokemonList} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

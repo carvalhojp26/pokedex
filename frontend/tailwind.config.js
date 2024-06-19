@@ -7,13 +7,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'background': '#373737',
-        'components': '#D6D6D6'
+        'number': '#A09F9F',
+        'pokemonBg': '#F8E9FF',
+        'inputBg': '#F3F2F2',
+        'myPurple': '#946BA7'
       },
       width: {
-        "custom": '500px',
-        "display-w": '550px',
-        "height": '350px'
+        input: '500px'
       },
     },
   },
