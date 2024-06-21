@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { PokemonData, TypeToColorMap } from '../types';
+import { useState, useEffect } from 'react';
+import { PokemonInfo, TypeToColorMap } from '../types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
 import axios from 'axios';
 
-interface PokemonProps {
-    pokemon: PokemonData;
+interface PokemonDetailsProps {
+    pokemon: PokemonInfo;
 }
 
-const Pokemon: React.FC<PokemonProps> = ({ pokemon }) => {
+export default function PokemonDetails({ pokemon }: PokemonDetailsProps) {
     const [isFavorite, setIsFavorite] = useState(false);
 
     useEffect(() => {
@@ -69,37 +69,42 @@ const Pokemon: React.FC<PokemonProps> = ({ pokemon }) => {
         rock: 'bg-yellow-700',
         water: 'bg-blue-500',
         fairy: 'bg-pink-200'
-
     };
 
     const bgClass = typeToColor[pokemon.type as keyof TypeToColorMap];
 
     return (
-        <div className="flex-col items-center rounded-lg">
-            <div className={`${bgClass} bg-opacity-15 rounded-xl`}>
-                <img src={pokemon.frontImage} alt={pokemon.name} className="w-48 h-48" />
+        <div className="flex">
+            <div className={`${bgClass} bg-opacity-15 rounded-xl p-4 w-[500px] h-[500px] flex-shrink-0 min-w-[450px] mt-8 mb-8 flex justify-center items-center`}>
+                <img src={pokemon.frontImage} alt="pokemonFrontImage" className="w-96 h-96 mb-4" />
             </div>
-            <div className="flex-1">
-                <div className="flex justify-between w-full">
-                    <p className="text-number p-2">Nº: {pokemon.id}</p>
-                    <span className={`${bgClass} mt-2 px-5 py-1 text-white font-bold rounded-lg`}>{capitalizeFirstLetter(pokemon.type)}</span>
+            <div className="w-full">
+                <div className="flex justify-between w-full mb-4 mt-12">
+                    <p className="text-number pl-8 mt-2">Nº: {pokemon.id}</p>
+                    <span className={`${bgClass} px-5 py-1 text-white font-bold rounded-lg`}>{capitalizeFirstLetter(pokemon.type)}</span>
                 </div>
-                <div className='flex items-center justify-between w-full'>
-                    <p className="text-xl p-2 font-normal">{capitalizeFirstLetter(pokemon.name)}</p>
-                    <FontAwesomeIcon 
-                        icon={isFavorite ? solidHeart : regularHeart}
-                        onClick={toggleFavorite}
-                        style={{ color: isFavorite ? 'red' : 'pink', cursor: 'pointer', transition: 'color 0.3s ease-in-out'}}
-                        size="1x"
-                        />
+                <div>
+                    <div className="flex items-center justify-between w-full mb-4">
+                        <p className="text-2xl p-2 font-semibold pl-8">{capitalizeFirstLetter(pokemon.name)}</p>
+                        <FontAwesomeIcon 
+                            icon={isFavorite ? solidHeart : regularHeart}
+                            onClick={toggleFavorite}
+                            style={{ color: isFavorite ? 'red' : 'pink', cursor: 'pointer', transition: 'color 0.3s ease-in-out'}}
+                            size="1x"
+                            />
+                    </div>
+                    <div className="mb-4 pl-8 mt-36 flex relative w-full h-32 text-xl">
+                        <p className="absolute top-0 left-0 ml-8"><span className="font-bold">Height:</span> {pokemon.height}</p>
+                        <p className="absolute top-0 right-0"><span className="font-bold">Weight:</span> {pokemon.weight}</p>
+                        <p className="absolute bottom-0 left-0 ml-8"><span className="font-bold">Move:</span> {capitalizeFirstLetter(pokemon.move)}</p>
+                        <p className="absolute bottom-0 right-0"><span className="font-bold">Ability:</span> {capitalizeFirstLetter(pokemon.ability)}</p>
+                    </div>
                 </div>
             </div>
         </div>
     );
-};
+}
 
 function capitalizeFirstLetter(string: string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
-
-export default Pokemon;

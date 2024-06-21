@@ -5,6 +5,17 @@ export interface PokemonData {
     type: string
 }
 
+export interface PokemonInfo {
+    id: number,
+    name: string,
+    frontImage: string,
+    type: string,
+    height: number,
+    weight: number,
+    move: string,
+    ability: string
+}
+
 export interface TypeToColorMap {
     bug: string;
     dragon: string;

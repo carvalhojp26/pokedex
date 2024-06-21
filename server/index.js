@@ -25,10 +25,8 @@ app.use(bodyParser.json())
 const pokemonSchema = new mongoose.Schema({
     id:Number,
     name:String,
-    height:Number,
-    weight:Number,
     frontImage:String,
-    backImage:String
+    type:String
 }, {collection: 'favorites'})
 
 const Pokemon = mongoose.model('pokemon', pokemonSchema)

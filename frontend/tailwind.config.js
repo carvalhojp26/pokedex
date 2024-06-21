@@ -13,7 +13,8 @@ module.exports = {
         'myPurple': '#946BA7'
       },
       width: {
-        input: '500px'
+        input: '500px',
+        pokemonInfoBg: '450px'
       },
     },
   },
