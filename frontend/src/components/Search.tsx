@@ -8,17 +8,22 @@ function Search() {
         setPokemonName(e.target.value);
     };
 
+    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+    };
+
     return (
-        <div className='flex flex-col items-center justify-center'>
-            <h1 className='text-3xl font-semibold tracking-wide text-myPurple'>Search your favorite Pokémon</h1>            
-            <form className='mt-10'>
+        <div className='ml-0 lg:ml-24 mt-2'>
+            <h1 className='text-8xl font-medium tracking-wide'>Pokémon<br/>search page</h1>
+            <form className='mt-10' onSubmit={handleFormSubmit}>
                 <input
                     className='w-full h-10 p-4 rounded-lg bg-inputBg mb-10 w-input'
                     type="text"
-                    placeholder="Search a Pokemon"
+                    placeholder="Pokemon name..."
                     value={pokemonName}
                     onChange={handleInputChange}
                 />
+                <button type="submit" className="hidden">Search</button>
             </form>
             <Display searchQuery={pokemonName} />
         </div>

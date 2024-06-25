@@ -75,29 +75,35 @@ export default function PokemonDetails({ pokemon }: PokemonDetailsProps) {
 
     return (
         <div className="flex">
-            <div className={`${bgClass} bg-opacity-15 rounded-xl p-4 w-[500px] h-[500px] flex-shrink-0 min-w-[450px] mt-8 mb-8 flex justify-center items-center`}>
-                <img src={pokemon.frontImage} alt="pokemonFrontImage" className="w-96 h-96 mb-4" />
+            <div className={`${bgClass} bg-opacity-15 rounded-xl p-4 w-[850px] h-[560px] flex-shrink-0 min-w-[450px] mb-8 flex justify-center items-center`}>
+                <img src={pokemon.frontImage} alt="pokemonFrontImage" className="w-pokemonWidth h-pokemonWidth mb-4" />
             </div>
             <div className="w-full">
-                <div className="flex justify-between w-full mb-4 mt-12">
-                    <p className="text-number pl-8 mt-2">Nº: {pokemon.id}</p>
-                    <span className={`${bgClass} px-5 py-1 text-white font-bold rounded-lg`}>{capitalizeFirstLetter(pokemon.type)}</span>
-                </div>
-                <div>
-                    <div className="flex items-center justify-between w-full mb-4">
-                        <p className="text-2xl p-2 font-semibold pl-8">{capitalizeFirstLetter(pokemon.name)}</p>
-                        <FontAwesomeIcon 
+                <div className='flex justify-between'>
+                    <p className='p-4 text-2xl '>Nº: {pokemon.id}</p>
+                    <FontAwesomeIcon 
                             icon={isFavorite ? solidHeart : regularHeart}
                             onClick={toggleFavorite}
                             style={{ color: isFavorite ? 'red' : 'pink', cursor: 'pointer', transition: 'color 0.3s ease-in-out'}}
-                            size="1x"
+                            size="2x"
+                            className='p-4 top-0 right-0'
                             />
+                </div>
+                <div>
+                    <h1 className='font-medium flex justify-center text-6xl mb-8'>{capitalizeFirstLetter(pokemon.name)}</h1>
+                </div>
+                <div className='flex h-96'> 
+                    <div className='w-full p-8 border-r-2 border-black'>
+                        <div className='mt-12'>
+                            <p className='text-2xl mb-12'>Height: <span className='font-light'>{pokemon.height}</span></p>
+                            <p className='text-2xl'>Weight: <span className='font-light'>{pokemon.weight}</span></p>
+                        </div>
                     </div>
-                    <div className="mb-4 pl-8 mt-36 flex relative w-full h-32 text-xl">
-                        <p className="absolute top-0 left-0 ml-8"><span className="font-bold">Height:</span> {pokemon.height}</p>
-                        <p className="absolute top-0 right-0"><span className="font-bold">Weight:</span> {pokemon.weight}</p>
-                        <p className="absolute bottom-0 left-0 ml-8"><span className="font-bold">Move:</span> {capitalizeFirstLetter(pokemon.move)}</p>
-                        <p className="absolute bottom-0 right-0"><span className="font-bold">Ability:</span> {capitalizeFirstLetter(pokemon.ability)}</p>
+                    <div className="w-full p-8">
+                        <div className="mt-12">
+                            <p className="text-2xl mb-12">Move: <span className='font-light'>{capitalizeFirstLetter(pokemon.move)}</span></p>
+                            <p className="text-2xl">Ability: <span className='font-light'>{capitalizeFirstLetter(pokemon.ability)}</span></p>
+                        </div>
                     </div>
                 </div>
             </div>

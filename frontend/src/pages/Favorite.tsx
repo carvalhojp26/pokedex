@@ -22,9 +22,11 @@ function Favorite() {
 
     return (
         <>
-            <Header />
-            <h1 className='text-3xl font-semibold tracking-wide text-myPurple mt-16'>Favorite Pokémon's</h1>
-            <Display favorites={favorites}/>
+            <Header/>
+            <div className='ml-0 lg:ml-24 mt-2'>
+                <h1 className='tracking-wide mt-16 text-8xl font-medium tracking-wide mb-16'>Favorite<br/>Pokémon's</h1>
+                <Display favorites={favorites}/>
+            </div>
         </>
     );
 }

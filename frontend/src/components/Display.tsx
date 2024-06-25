@@ -1,4 +1,4 @@
-    import React, { useState, useEffect } from 'react';
+    import { useState, useEffect } from 'react';
     import axios from 'axios';
     import { PokemonData, PokemonInfo } from '../types';
     import Pokemon from './Pokemon';
@@ -9,7 +9,7 @@
         favorites?: PokemonData[];
     }    
 
-    const Display: React.FC<DisplayProps> = ({ searchQuery, favorites }) => {
+    function Display ({ searchQuery, favorites }:DisplayProps) {
         const [pokemonData, setPokemonData] = useState<PokemonData[]>([]);
         const [pokemonInfo, setPokemonInfo] = useState<PokemonInfo | null>(null);
 
@@ -65,14 +65,14 @@
 
         if (pokemonInfo) {
             return (
-                <div className="border-2 p-8 rounded-lg border-myPurple overflow-y-auto" style={{ height: '620px', width: '1096px' }}>
+                <div className="border-2 p-8 rounded-lg border-black mb-12 overflow-y-auto" style={{ height: '620px', width: '1750px' }}>
                     <PokemonDetails pokemon={pokemonInfo}/>
                 </div>
             );
         }
 
         return (
-            <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4 border-2 p-8 rounded-lg border-myPurple overflow-y-auto" style={{ height: '620px', width: '1096px' }}>
+            <div className="grid md:grid-cols-2 lg:grid-cols-8 gap-4 border-2 p-8 rounded-lg border-black overflow-y-auto mb-12 " style={{ height: '620px', width: '1750px' }}>
                 {pokemonData.map(pokemon => (
                     <Pokemon key={pokemon.id} pokemon={pokemon} />
                 ))}

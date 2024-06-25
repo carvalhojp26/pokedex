@@ -1,29 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import { PokemonData, TypeToColorMap } from '../types';
+import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
-import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
+import { faHeart as solidHeart, faHeart as regularHeart } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+import { PokemonData, TypeToColorMap } from '../types';
 
 interface PokemonProps {
     pokemon: PokemonData;
 }
 
-const Pokemon: React.FC<PokemonProps> = ({ pokemon }) => {
-    const [isFavorite, setIsFavorite] = useState(false);
+function Pokemon ({ pokemon }: PokemonProps) {
+    const [isFavorite, setIsFavorite] = useState(() => {
+        return JSON.parse(localStorage.getItem(`favorite_${pokemon.id}`) || 'false');
+    });
 
     useEffect(() => {
-        checkIfFavorite();
-    }, [pokemon]);
+        localStorage.setItem(`favorite_${pokemon.id}`, JSON.stringify(isFavorite));
+    }, [isFavorite, pokemon.id]);
 
-    const checkIfFavorite = async () => {
-        try {
-            const response = await axios.get(`http://localhost:3001/favorites/${pokemon.id}`);
-            setIsFavorite(response.data.isFavorite);
-        } catch (error) {
-            console.error('Failed to check favorite status:', error);
-        }
-    };
+    useEffect(() => {
+        const fetchFavoriteStatus = async () => {
+            try {
+                const response = await axios.get(`http://localhost:3001/favorites/${pokemon.id}`);
+                setIsFavorite(response.data.isFavorite);
+            } catch (error) {
+                console.error('Failed to check favorite status:', error);
+            }
+        };
+
+        fetchFavoriteStatus();
+    }, [pokemon.id]);
 
     const toggleFavorite = async () => {
         setIsFavorite(!isFavorite);
@@ -82,7 +87,7 @@ const Pokemon: React.FC<PokemonProps> = ({ pokemon }) => {
             <div className="flex-1">
                 <div className="flex justify-between w-full">
                     <p className="text-number p-2">Nº: {pokemon.id}</p>
-                    <span className={`${bgClass} mt-2 px-5 py-1 text-white font-bold rounded-lg`}>{capitalizeFirstLetter(pokemon.type)}</span>
+                    <span className={`${bgClass} mt-2 px-5 py-1 text-white font-bold rounded-lg w-auto`}>{capitalizeFirstLetter(pokemon.type)}</span>
                 </div>
                 <div className='flex items-center justify-between w-full'>
                     <p className="text-xl p-2 font-normal">{capitalizeFirstLetter(pokemon.name)}</p>
